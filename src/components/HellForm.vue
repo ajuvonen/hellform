@@ -22,11 +22,13 @@ const currentSection = ref(1);
         disabled
         show-ticks="always"
       ></v-slider>
-      <form-section1 v-if="currentSection === 1"></form-section1>
-      <form-section2 v-if="currentSection === 2"></form-section2>
-      <form-section3 v-if="currentSection === 3"></form-section3>
-      <form-section4 v-if="currentSection === 4"></form-section4>
-      <form-section5 v-if="currentSection === 5"></form-section5>
+      <v-expand-transition>
+        <form-section1 v-if="currentSection === 1"></form-section1>
+        <form-section2 v-if="currentSection === 2"></form-section2>
+        <form-section3 v-if="currentSection === 3"></form-section3>
+        <form-section4 v-if="currentSection === 4"></form-section4>
+        <form-section5 v-if="currentSection === 5"></form-section5>
+      </v-expand-transition>
       <v-expansion-panels>
         <v-expansion-panel elevation="0">
           <v-expansion-panel-title>
