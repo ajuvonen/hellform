@@ -19,7 +19,8 @@ const currentSection = ref(1);
         :ticks="{1: 'Validation', 2: 'Accessibility', 3: 'Gestalt', 4: 'TBD', 5: 'Dark Patterns'}"
         :min="1"
         :max="5"
-        disabled
+        readonly
+        color="primary"
         show-ticks="always"
       ></v-slider>
       <v-expand-transition>
@@ -72,3 +73,8 @@ const currentSection = ref(1);
     </v-card-actions>
   </v-card>
 </template>
+<style lang="scss" scoped>
+:deep(.v-slider__container) {
+  cursor: not-allowed !important;
+}
+</style>
