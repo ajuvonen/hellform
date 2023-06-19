@@ -2,7 +2,8 @@
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
-import {requiredValidator} from '@/utils';
+import {regexValidator, requiredValidator} from '@/utils';
+import RowHeader from '@/components/RowHeader.vue';
 
 const {currentFormValid, data} = storeToRefs(useFormStore());
 
@@ -25,9 +26,11 @@ const sexualOrientationOptions = [
 
 const requiredRules = [requiredValidator()];
 
+const birthdateRules = [requiredValidator(), regexValidator(/^\d{2,2}\/\d{2,2}\/\d{4,4}$/)];
+
 useCurrentSectionProblems([
-  `There's a limited choice in genders`,
   `Asking for background information that is irrelevant to the service, and giving no opt-out possibility.`,
+  `There's a limited choice in answer options.`,
   `Access to contacts usually means your friends are about to be spammed unwillingly.`,
   `The contacts confirmation contains an example of confirm shaming, where the opt-out is worded negatively.`,
   `The free premium trial is not actually free, and contains a continuous subscription trap`,
@@ -38,7 +41,7 @@ useCurrentSectionProblems([
 <template>
   <v-form v-model="currentFormValid">
     <v-container>
-      <h3 class="text-h6">Background Information</h3>
+      <row-header text="Background Information" />
       <v-row>
         <v-col cols="6">
           <div class="d-flex with-gap">
@@ -63,17 +66,25 @@ useCurrentSectionProblems([
           </div>
         </v-col>
         <v-col cols="6">
-          <v-select
-            v-model="data.sexualOrientation"
-            :items="sexualOrientationOptions"
-            :rules="requiredRules"
-            item-title="text"
-            item-value="value"
-            label="Sexual Orientation"
-          ></v-select>
+          <div class="d-flex with-gap">
+            <v-select
+              v-model="data.sexualOrientation"
+              :items="sexualOrientationOptions"
+              :rules="requiredRules"
+              item-title="text"
+              item-value="value"
+              label="Sexual Orientation"
+            ></v-select>
+            <v-text-field
+              v-model="data.birthdate"
+              :rules="birthdateRules"
+              label="Birth Date"
+              placeholder="DD/MM/YYYY"
+            ></v-text-field>
+          </div>
         </v-col>
       </v-row>
-      <h3 class="text-h6 mt-4">Additional Details</h3>
+      <row-header text="Additional Details" />
       <v-row>
         <v-col cols="6">
           <v-radio-group

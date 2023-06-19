@@ -33,6 +33,7 @@ export const useFormStore = defineStore('form', {
       gender: null as number | null,
       incomeClass: null as null | number,
       sexualOrientation: null as null | number,
+      birthdate: '',
       contactsAccess: null as null | boolean,
       subscribeToPremium: null as null | boolean,
       acceptTOS: false,
