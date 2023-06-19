@@ -66,7 +66,6 @@ const currentSection = ref(1);
           :disabled="!currentFormValid"
           color="primary"
           append-icon="mdi-check"
-          @click="currentSection = currentSection + 1"
           >Submit</v-btn
         >
       </router-link>
