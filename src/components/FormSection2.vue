@@ -3,6 +3,7 @@ import {requiredValidator} from '@/utils';
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
+import RowHeader from '@/components/RowHeader.vue';
 
 const formStore = useFormStore();
 const {toggleDevice, removeStreamingService, addStreamingService} = formStore;
@@ -36,34 +37,44 @@ useCurrentSectionProblems([
 <template>
   <v-form v-model="currentFormValid">
     <v-container class="faded">
-      <h3 class="text-h6">Which smart devices you use?</h3>
-      <v-row class="mt-4 mb-4 d-flex justify-center with-gap">
-        <div
-          v-for="device in deviceOptions"
-          :key="device"
-          class="device-button d-flex flex-column align-center justify-center"
-          :class="{'device-button--selected': data.devices.includes(device)}"
-          @click="toggleDevice(device)"
-        >
-          <v-icon :icon="`mdi-${device}`"></v-icon>
-          <span>{{ device }}</span>
-        </div>
+      <row-header text="Which smart devices you use?" />
+      <v-row>
+        <v-col cols="12" class="d-flex justify-center with-gap">
+          <div
+            v-for="device in deviceOptions"
+            :key="device"
+            class="device-button d-flex flex-column align-center justify-center"
+            :class="{'device-button--selected': data.devices.includes(device)}"
+            @click="toggleDevice(device)"
+          >
+            <v-icon :icon="`mdi-${device}`"></v-icon>
+            <span>{{ device }}</span>
+          </div>
+        </v-col>
       </v-row>
-      <h3 class="text-h6">Which categories are you interested in?</h3>
-      <v-row class="mb-4">
+      <row-header text="Which categories are you interested in?" />
+      <v-row class="mt-n4">
         <v-col cols="12" class="d-inline-flex flex-wrap">
-          <div v-for="category in categoryOptions" :key="category" class="mr-2 d-inline-flex align-center">
-            <v-checkbox v-model="data.categories" :value="category" :hide-details="true"></v-checkbox>
+          <div
+            v-for="category in categoryOptions"
+            :key="category"
+            class="mr-2 d-inline-flex align-center"
+          >
+            <v-checkbox
+              v-model="data.categories"
+              :value="category"
+              :hide-details="true"
+            ></v-checkbox>
             <v-label>{{ category }}</v-label>
           </div>
         </v-col>
       </v-row>
-      <h3 class="text-h6">Which streaming services you use?</h3>
-      <v-row class="mt-4" v-if="data.services.length">
+      <row-header text="Which streaming services you use?" />
+      <v-row v-if="data.services.length">
         <v-col cols="5"><v-label>Service</v-label></v-col>
         <v-col cols="5"><v-label>Preferred Device</v-label></v-col>
       </v-row>
-      <v-row class="mb-n4" v-for="service in data.services" :key="service.id">
+      <v-row class="mt-n4" v-for="service in data.services" :key="service.id">
         <v-col cols="5">
           <v-text-field v-model="service.name" :rules="requiredRules" required></v-text-field>
         </v-col>
@@ -74,7 +85,7 @@ useCurrentSectionProblems([
           <v-btn icon="mdi-delete" color="error" @click="removeStreamingService(service)"></v-btn>
         </v-col>
       </v-row>
-      <v-btn icon="mdi-plus" class="mt-4" color="secondary" @click="addStreamingService"></v-btn>
+      <v-btn icon="mdi-plus" color="secondary" @click="addStreamingService"></v-btn>
     </v-container>
   </v-form>
 </template>

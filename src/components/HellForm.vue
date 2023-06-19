@@ -20,7 +20,7 @@ const currentSection = ref(1);
         :min="1"
         :max="5"
         readonly
-        color="primary"
+        color="secondary"
         show-ticks="always"
       ></v-slider>
       <v-expand-transition>

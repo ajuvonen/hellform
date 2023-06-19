@@ -3,6 +3,7 @@ import {requiredValidator, lengthValidator, regexValidator, countryCodes} from '
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
+import RowHeader from '@/components/RowHeader.vue';
 
 const {currentFormValid, data} = storeToRefs(useFormStore());
 const nameRules = [requiredValidator(), lengthValidator(3, 10), regexValidator(/^[A-Za-z]+$/)];
@@ -35,8 +36,8 @@ useCurrentSectionProblems([
 <template>
   <v-form v-model="currentFormValid">
     <v-container>
-      <h3 class="text-h6">Basic information</h3>
-      <v-row class="mt-4">
+      <row-header text="Basic Information" />
+      <v-row>
         <v-col cols="6">
           <v-text-field
             v-model="data.firstname"
@@ -65,12 +66,7 @@ useCurrentSectionProblems([
               required
             >
             </v-text-field>
-            <v-text-field
-              v-model="data.city"
-              :rules="cityRules"
-              label="City"
-              required
-            >
+            <v-text-field v-model="data.city" :rules="cityRules" label="City" required>
             </v-text-field>
           </div>
         </v-col>

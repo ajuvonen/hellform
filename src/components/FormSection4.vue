@@ -2,6 +2,7 @@
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
+import RowHeader from '@/components/RowHeader.vue';
 
 const {currentFormValid} = storeToRefs(useFormStore());
 
@@ -10,8 +11,8 @@ useCurrentSectionProblems([]);
 <template>
   <v-form v-model="currentFormValid">
     <v-container>
-      <h3 class="text-h6">TBD</h3>
-      <v-row class="mt-4">
+      <row-header text="TBD" />
+      <v-row>
       </v-row>
     </v-container>
   </v-form>

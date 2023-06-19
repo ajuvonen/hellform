@@ -2,19 +2,17 @@
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
+import RowHeader from '@/components/RowHeader.vue';
 
 const {currentFormValid} = storeToRefs(useFormStore());
 
-useCurrentSectionProblems([
-  `Buttons in the footer are in an illogical order.`,
-]);
+useCurrentSectionProblems([`Buttons in the footer are in an illogical order.`]);
 </script>
 <template>
   <v-form v-model="currentFormValid">
     <v-container>
-      <h3 class="text-h6">Family History</h3>
-      <v-row class="mt-4">
-      </v-row>
+      <row-header text="Family History" />
+      <v-row></v-row>
     </v-container>
   </v-form>
 </template>
