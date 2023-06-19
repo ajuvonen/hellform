@@ -12,8 +12,7 @@ useCurrentSectionProblems([]);
   <v-form v-model="currentFormValid">
     <v-container>
       <row-header text="TBD" />
-      <v-row>
-      </v-row>
+      <v-row></v-row>
     </v-container>
   </v-form>
 </template>
