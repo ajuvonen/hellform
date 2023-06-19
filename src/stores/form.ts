@@ -25,6 +25,7 @@ export const useFormStore = defineStore('form', {
       password: '',
 
       // Section 2
+      categories: [] as string[],
       services: [] as StreamingService[],
       devices: [] as string[],
 

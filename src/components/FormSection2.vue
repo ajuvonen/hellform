@@ -10,17 +10,32 @@ const {currentFormValid, data} = storeToRefs(formStore);
 
 const deviceOptions = ['cellphone', 'laptop', 'desktop-tower', 'watch', 'tablet'];
 
+const categoryOptions = [
+  'Action',
+  'Animation',
+  'Biographies',
+  'Comedy',
+  'Crime',
+  'Documentaries',
+  'Drama',
+  'Suspense',
+  'Young Adults',
+];
+
 const requiredRules = [requiredValidator()];
 
 useCurrentSectionProblems([
+  `The contrast ratio of the text and the background is not adequate for people with impaired vision or challenging lighting conditions.`,
   `The devices are not buttons but stylized div elements. These cannot be interacted with a keyboard and are not visible to screen readers.`,
+  `Checkboxes don't have a focus outline that would show the highlighted item. This makes keyboard navigation difficult.`,
+  `The checkbox labels are not connected to the input themselves, which makes understanding the form with screen readers difficult.`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,
 ]);
 </script>
 <template>
   <v-form v-model="currentFormValid">
-    <v-container>
+    <v-container class="faded">
       <h3 class="text-h6">Which smart devices you use?</h3>
       <v-row class="mt-4 mb-4 d-flex justify-center with-gap">
         <div
@@ -33,6 +48,15 @@ useCurrentSectionProblems([
           <v-icon :icon="`mdi-${device}`"></v-icon>
           <span>{{ device }}</span>
         </div>
+      </v-row>
+      <h3 class="text-h6">Which categories are you interested in?</h3>
+      <v-row class="mb-4">
+        <v-col cols="12" class="d-inline-flex flex-wrap">
+          <div v-for="category in categoryOptions" :key="category" class="mr-2 d-inline-flex align-center">
+            <v-checkbox v-model="data.categories" :value="category" :hide-details="true"></v-checkbox>
+            <v-label>{{ category }}</v-label>
+          </div>
+        </v-col>
       </v-row>
       <h3 class="text-h6">Which streaming services you use?</h3>
       <v-row class="mt-4" v-if="data.services.length">
@@ -55,6 +79,14 @@ useCurrentSectionProblems([
   </v-form>
 </template>
 <style lang="scss" scoped>
+.faded {
+  color: gray;
+}
+
+:deep(.v-selection-control--focus-visible::before) {
+  display: none !important;
+}
+
 .device-button {
   cursor: pointer;
   width: 10rem;
