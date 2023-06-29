@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {requiredValidator} from '@/utils';
+import {lengthValidator, requiredValidator} from '@/utils';
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
@@ -24,12 +24,15 @@ const categoryOptions = [
 
 const requiredRules = [requiredValidator()];
 
+const additionalCategoryRules = [lengthValidator(0, 100)];
+
 useCurrentSectionProblems([
   `The contrast ratio of the text and the background is not adequate for people with impaired vision or challenging lighting conditions.`,
   `The headings are not proper heading elements, but stylized divs. This results in poor accessibility experience.`,
   `The devices are not buttons, but stylized divs. These cannot be interacted with a keyboard and are not visible to screen readers.`,
   `Checkboxes don't have a focus outline that would show the highlighted item. This makes keyboard navigation difficult.`,
   `The checkbox labels are not connected to the input themselves, which makes understanding the form with screen readers difficult.`,
+  `Form instructions shouldn't be given in placeholders.`,
   `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short.`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,
@@ -76,6 +79,11 @@ useCurrentSectionProblems([
             ></v-checkbox>
             <v-label>{{ category }}</v-label>
           </div>
+          <v-text-field
+            v-model="data.additionalCategories"
+            :rules="additionalCategoryRules"
+            placeholder="Additional categories separated by a comma (,)"
+          ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -103,12 +111,12 @@ useCurrentSectionProblems([
           ></v-combobox>
         </v-col>
         <v-col cols="2">
-          <v-btn icon="mdi-delete" color="error" @click="removeStreamingService(service)"></v-btn>
+          <v-btn icon="mdi-delete" color="error" variant="tonal" @click="removeStreamingService(service)"></v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-btn icon="mdi-plus" color="secondary" @click="addStreamingService"></v-btn>
+          <v-btn icon="mdi-plus" color="secondary" variant="tonal" @click="addStreamingService"></v-btn>
         </v-col>
       </v-row>
     </v-container>
