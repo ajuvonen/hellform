@@ -82,8 +82,6 @@ useCurrentSectionProblems([
               v-model="data.countryCode"
               :items="countryCodes"
               :rules="countryCodeRules"
-              item-title="text"
-              item-value="code"
               label="Country Code"
             >
               <template #selection="{item}">{{ `+${item.value}` }}</template>

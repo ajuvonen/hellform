@@ -8,20 +8,20 @@ import RowHeader from '@/components/RowHeader.vue';
 const {currentFormValid, data} = storeToRefs(useFormStore());
 
 const incomeOptions = [
-  {text: '< 25 000 €', value: 1},
-  {text: '25 000 € - 35 0000 €', value: 2},
-  {text: '35 000 € - 50 0000 €', value: 3},
-  {text: '> 50 000 €', value: 4},
+  {title: '< 25 000 €', value: 1},
+  {title: '25 000 € - 35 0000 €', value: 2},
+  {title: '35 000 € - 50 0000 €', value: 3},
+  {title: '> 50 000 €', value: 4},
 ];
 
 const genderOptions = [
-  {text: 'Male', value: 1},
-  {text: 'Female', value: 2},
+  {title: 'Male', value: 1},
+  {title: 'Female', value: 2},
 ];
 
 const sexualOrientationOptions = [
-  {text: 'Straight', value: 1},
-  {text: 'Other', value: 2},
+  {title: 'Straight', value: 1},
+  {title: 'Other', value: 2},
 ];
 
 const requiredRules = [requiredValidator()];
@@ -49,8 +49,6 @@ useCurrentSectionProblems([
               v-model="data.gender"
               :items="genderOptions"
               :rules="requiredRules"
-              item-title="text"
-              item-value="value"
               label="Gender"
             >
             </v-select>
@@ -58,8 +56,6 @@ useCurrentSectionProblems([
               v-model="data.incomeClass"
               :items="incomeOptions"
               :rules="requiredRules"
-              item-title="text"
-              item-value="value"
               label="Annual Income"
             >
             </v-select>
@@ -71,8 +67,6 @@ useCurrentSectionProblems([
               v-model="data.sexualOrientation"
               :items="sexualOrientationOptions"
               :rules="requiredRules"
-              item-title="text"
-              item-value="value"
               label="Sexual Orientation"
             ></v-select>
             <v-text-field
