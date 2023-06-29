@@ -9,7 +9,7 @@ const formStore = useFormStore();
 const {toggleDevice, removeStreamingService, addStreamingService} = formStore;
 const {currentFormValid, data} = storeToRefs(formStore);
 
-const deviceOptions = ['cellphone', 'laptop', 'desktop-tower', 'watch', 'tablet'];
+const deviceOptions = ['Cellphone', 'Laptop', 'Desktop-Tower', 'Watch', 'Tablet'];
 
 const categoryOptions = [
   'Action',
@@ -30,6 +30,7 @@ useCurrentSectionProblems([
   `The devices are not buttons but stylized div elements. These cannot be interacted with a keyboard and are not visible to screen readers.`,
   `Checkboxes don't have a focus outline that would show the highlighted item. This makes keyboard navigation difficult.`,
   `The checkbox labels are not connected to the input themselves, which makes understanding the form with screen readers difficult.`,
+  `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,
 ]);
@@ -47,7 +48,7 @@ useCurrentSectionProblems([
             :class="{'device-button--selected': data.devices.includes(device)}"
             @click="toggleDevice(device)"
           >
-            <v-icon :icon="`mdi-${device}`"></v-icon>
+            <v-icon :icon="`mdi-${device.toLowerCase()}`"></v-icon>
             <span>{{ device }}</span>
           </div>
         </v-col>
@@ -76,16 +77,28 @@ useCurrentSectionProblems([
       </v-row>
       <v-row class="mt-n4" v-for="service in data.services" :key="service.id">
         <v-col cols="5">
-          <v-text-field v-model="service.name" :rules="requiredRules" required></v-text-field>
+          <v-combobox
+            v-model="service.name"
+            :items="['Netflix', 'HBO', 'Disney+', 'Hulu', 'Viaplay']"
+            :rules="requiredRules"
+          ></v-combobox>
         </v-col>
         <v-col cols="5">
-          <v-text-field v-model="service.device" :rules="requiredRules" required></v-text-field>
+          <v-combobox
+            v-model="service.device"
+            :items="data.devices"
+            :rules="requiredRules"
+          ></v-combobox>
         </v-col>
         <v-col cols="2">
           <v-btn icon="mdi-delete" color="error" @click="removeStreamingService(service)"></v-btn>
         </v-col>
       </v-row>
-      <v-btn icon="mdi-plus" color="secondary" @click="addStreamingService"></v-btn>
+      <v-row>
+        <v-col cols="12">
+          <v-btn icon="mdi-plus" color="secondary" @click="addStreamingService"></v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </v-form>
 </template>
@@ -107,10 +120,6 @@ useCurrentSectionProblems([
 
   i {
     font-size: 50pt;
-  }
-
-  span {
-    text-transform: capitalize;
   }
 
   &.device-button--selected {
