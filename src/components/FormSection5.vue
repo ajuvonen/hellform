@@ -8,10 +8,9 @@ import RowHeader from '@/components/RowHeader.vue';
 const {currentFormValid, data} = storeToRefs(useFormStore());
 
 const incomeOptions = [
-  {title: '< 25 000 €', value: 1},
-  {title: '25 000 € - 35 0000 €', value: 2},
-  {title: '35 000 € - 50 0000 €', value: 3},
-  {title: '> 50 000 €', value: 4},
+  {title: '25 000 € - 35 0000 €', value: 1},
+  {title: '35 000 € - 50 0000 €', value: 2},
+  {title: '> 50 000 €', value: 3},
 ];
 
 const genderOptions = [
