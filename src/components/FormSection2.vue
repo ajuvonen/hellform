@@ -3,7 +3,6 @@ import {requiredValidator} from '@/utils';
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
-import RowHeader from '@/components/RowHeader.vue';
 
 const formStore = useFormStore();
 const {toggleDevice, removeStreamingService, addStreamingService} = formStore;
@@ -27,10 +26,11 @@ const requiredRules = [requiredValidator()];
 
 useCurrentSectionProblems([
   `The contrast ratio of the text and the background is not adequate for people with impaired vision or challenging lighting conditions.`,
-  `The devices are not buttons but stylized div elements. These cannot be interacted with a keyboard and are not visible to screen readers.`,
+  `The headings are not proper heading elements, but stylized divs. This results in poor accessibility experience.`,
+  `The devices are not buttons, but stylized divs. These cannot be interacted with a keyboard and are not visible to screen readers.`,
   `Checkboxes don't have a focus outline that would show the highlighted item. This makes keyboard navigation difficult.`,
   `The checkbox labels are not connected to the input themselves, which makes understanding the form with screen readers difficult.`,
-  `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short`,
+  `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short.`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,
 ]);
@@ -38,7 +38,11 @@ useCurrentSectionProblems([
 <template>
   <v-form v-model="currentFormValid">
     <v-container class="faded">
-      <row-header text="Which smart devices you use?" />
+      <v-row>
+        <v-col cols="12">
+          <div class="text-h6">Which smart devices you use?</div>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="12" class="d-flex justify-center with-gap">
           <div
@@ -53,7 +57,11 @@ useCurrentSectionProblems([
           </div>
         </v-col>
       </v-row>
-      <row-header text="Which categories are you interested in?" />
+      <v-row>
+        <v-col cols="12">
+          <div class="text-h6">Which categories are you interested in?</div>
+        </v-col>
+      </v-row>
       <v-row class="mt-n4">
         <v-col cols="12" class="d-inline-flex flex-wrap">
           <div
@@ -70,7 +78,11 @@ useCurrentSectionProblems([
           </div>
         </v-col>
       </v-row>
-      <row-header text="Which streaming services you use?" />
+      <v-row>
+        <v-col cols="12">
+          <div class="text-h6">Which services you use?</div>
+        </v-col>
+      </v-row>
       <v-row v-if="data.services.length">
         <v-col cols="5"><v-label>Service</v-label></v-col>
         <v-col cols="5"><v-label>Preferred Device</v-label></v-col>
