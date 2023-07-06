@@ -30,6 +30,16 @@ export const useFormStore = defineStore('form', {
       services: [] as StreamingService[],
       devices: [] as string[],
 
+      // Section 3
+      favoriteMale: '',
+      favoriteMaleWork: '',
+      favoriteFemale: '',
+      favoriteFemaleWork: '',
+      favoriteComposer: '',
+      favoriteComposerWork: '',
+      favoriteDirector: '',
+      favoriteDirectorWork: '',
+
       // Section 5
       gender: null as number | null,
       incomeClass: null as null | number,
