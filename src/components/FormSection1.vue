@@ -30,6 +30,7 @@ useCurrentSectionProblems([
   `Country code list sort order is inconvenient and there's no search option.`,
   `The phone number input has too lax validation, considering the country code is a separate field.`,
   `The password validation has multiple problems: fixed content requirements, limited characters, too low minimum and maximum lengths.`,
+  `No "retype password"-field, which makes password input prone for typos (opinionated).`,
   `Validation is done before user has finished their inputs (opinionated).`,
 ]);
 </script>

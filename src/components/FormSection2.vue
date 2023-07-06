@@ -32,7 +32,7 @@ useCurrentSectionProblems([
   `The devices are not buttons, but stylized divs. These cannot be interacted with a keyboard and are not visible to screen readers.`,
   `Checkboxes don't have a focus outline that would show the highlighted item. This makes keyboard navigation difficult.`,
   `The checkbox labels are not connected to the input themselves, which makes understanding the form with screen readers difficult.`,
-  `Form instructions shouldn't be given in placeholders.`,
+  `Additional categories has no label. Form instructions shouldn't be given in placeholders.`,
   `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short.`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,

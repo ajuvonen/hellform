@@ -22,6 +22,7 @@ import {RouterView} from 'vue-router';
 <style lang="scss" scoped>
 a {
   text-decoration: none;
+  margin: 2px;
 }
 .v-container {
   max-width: 1200px;
