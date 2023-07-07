@@ -2,9 +2,14 @@
 import {ref} from 'vue';
 import HellForm from '@/components/HellForm.vue';
 import {useFormStore} from '@/stores/form';
+import {storeToRefs} from 'pinia';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const formStore = useFormStore();
 const formActive = ref(false);
+
+const {data} = storeToRefs(formStore);
 
 const activateForm = () => {
   formStore.$reset();
@@ -35,14 +40,19 @@ const activateForm = () => {
         This app does not collect or send information anywhere, but it is still recommended to use
         fake data.
       </p>
-      <v-btn
-        v-if="!formActive"
-        class="mt-10"
-        color="primary"
-        prepend-icon="mdi-heart"
-        @click="activateForm"
-        >Get Started</v-btn
-      >
+      <div class="d-flex with-gap justify-center">
+        <v-btn
+          v-if="!formActive"
+          class="mt-10"
+          :color="data.skipAllowed ? 'secondary' : 'primary'"
+          prepend-icon="mdi-heart"
+          @click="activateForm"
+          >Get Started</v-btn
+        >
+        <v-btn v-if="data.skipAllowed" class="mt-10" color="primary" prepend-icon="mdi-run-fast"
+         @click="router.push('/thanks')" >Skip to Finish</v-btn
+        >
+      </div>
     </div>
     <hell-form v-if="formActive"></hell-form>
   </v-expand-transition>

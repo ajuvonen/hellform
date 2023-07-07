@@ -49,6 +49,9 @@ export const useFormStore = defineStore('form', {
       subscribeToPremium: null as null | boolean,
       acceptTOS: false,
       receiveSpam: true,
+
+      // Other
+      skipAllowed: false,
     },
   }),
   actions: {
