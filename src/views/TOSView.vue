@@ -3,8 +3,8 @@ import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
 
 const formStore = useFormStore();
-const {data} = storeToRefs(formStore);
-data.value.skipAllowed = true;
+const {skipAllowed} = storeToRefs(formStore);
+skipAllowed.value = true;
 </script>
 <template>
   <h1 class="text-h1 text-center mt-10">Terms Of Service</h1>

@@ -10,8 +10,10 @@ type StreamingService = {
 
 export const useFormStore = defineStore('form', {
   state: () => ({
+    currentForm: null as HTMLFormElement | null,
     currentFormValid: false,
     currentSectionProblems: [] as string[],
+    skipAllowed: false,
     data: {
       // Section 1
       firstname: '',
@@ -49,9 +51,6 @@ export const useFormStore = defineStore('form', {
       subscribeToPremium: null as null | boolean,
       acceptTOS: false,
       receiveSpam: true,
-
-      // Other
-      skipAllowed: false,
     },
   }),
   actions: {

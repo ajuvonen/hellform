@@ -5,7 +5,7 @@ import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
 import RowHeader from '@/components/RowHeader.vue';
 
-const {currentFormValid, data} = storeToRefs(useFormStore());
+const {currentForm, currentFormValid, data} = storeToRefs(useFormStore());
 const nameRules = [requiredValidator(), lengthValidator(3, 10), regexValidator(/^[A-Za-z]+$/)];
 const emailRules = [requiredValidator(), lengthValidator(9, 20)];
 const addressRules = [requiredValidator(), lengthValidator(10, 50)];
@@ -35,7 +35,7 @@ useCurrentSectionProblems([
 ]);
 </script>
 <template>
-  <v-form v-model="currentFormValid">
+  <v-form ref="currentForm" v-model="currentFormValid">
     <v-container>
       <row-header text="Basic Information" />
       <v-row>

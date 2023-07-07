@@ -1,26 +1,36 @@
 <script setup lang="ts">
 import {ref} from 'vue';
+import {storeToRefs} from 'pinia';
+import {useRouter} from 'vue-router';
 import FormSection1 from '@/components/FormSection1.vue';
 import FormSection2 from '@/components/FormSection2.vue';
 import FormSection3 from '@/components/FormSection3.vue';
 import FormSection4 from '@/components/FormSection4.vue';
-import FormSection5 from '@/components/FormSection5.vue';
 import CurrentSectionProblems from '@/components/CurrentSectionProblems.vue';
+import {useFormStore} from '@/stores/form';
 
-// const {currentFormValid} = storeToRefs(useFormStore());
-const currentFormValid = true;
+const router = useRouter();
+const {currentForm, currentFormValid} = storeToRefs(useFormStore());
 const currentSection = ref(1);
+
+const nextSection = async () => {
+  const {valid} = await currentForm.value?.validate();
+  if (valid && currentSection.value < 4) {
+    currentSection.value = currentSection.value + 1;
+  } else if (valid && currentSection.value === 4) {
+    router.push('/thanks');
+  }
+};
 </script>
 <template>
   <v-card class="mt-10">
     <v-card-text>
       <v-slider
         v-model="currentSection"
-        :ticks="{1: 'Validation', 2: 'Accessibility', 3: 'Gestalt', 4: 'TBD', 5: 'Dark Patterns'}"
+        :ticks="{1: 'Validation', 2: 'Accessibility', 3: 'Gestalt', 4: 'Dark Patterns'}"
         :min="1"
-        :max="5"
-        readonly
-        color="secondary"
+        :max="4"
+        disabled
         show-ticks="always"
       ></v-slider>
       <v-expand-transition>
@@ -28,7 +38,6 @@ const currentSection = ref(1);
         <form-section2 v-if="currentSection === 2"></form-section2>
         <form-section3 v-if="currentSection === 3"></form-section3>
         <form-section4 v-if="currentSection === 4"></form-section4>
-        <form-section5 v-if="currentSection === 5"></form-section5>
       </v-expand-transition>
       <v-expansion-panels>
         <v-expansion-panel elevation="0">
@@ -52,28 +61,13 @@ const currentSection = ref(1);
         >Back</v-btn
       >
       <v-btn
-        v-if="currentSection < 5"
         :style="{order: currentSection === 3 ? 0 : 1}"
-        :disabled="!currentFormValid"
+        :prepend-icon="currentSection < 4 ? 'mdi-arrow-right' : 'mdi-check'"
+        :disabled="currentSection === 2 && !currentFormValid"
         color="primary"
-        append-icon="mdi-arrow-right"
-        @click="currentSection = currentSection + 1"
-        >Next</v-btn
+        @click="nextSection"
+        >{{ currentSection < 4 ? 'Next' : 'Submit' }}</v-btn
       >
-      <router-link to="/thanks">
-        <v-btn
-          v-if="currentSection === 5"
-          :disabled="!currentFormValid"
-          color="primary"
-          append-icon="mdi-check"
-          >Submit</v-btn
-        >
-      </router-link>
     </v-card-actions>
   </v-card>
 </template>
-<style lang="scss" scoped>
-:deep(.v-slider__container) {
-  cursor: not-allowed !important;
-}
-</style>

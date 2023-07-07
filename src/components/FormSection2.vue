@@ -6,7 +6,7 @@ import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
 
 const formStore = useFormStore();
 const {toggleDevice, removeStreamingService, addStreamingService} = formStore;
-const {currentFormValid, data} = storeToRefs(formStore);
+const {currentForm, currentFormValid, data} = storeToRefs(formStore);
 
 const deviceOptions = ['Cellphone', 'Laptop', 'Desktop-Tower', 'Watch', 'Tablet'];
 
@@ -37,10 +37,11 @@ useCurrentSectionProblems([
   `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short.`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,
+  `The next button on the form enters a disabled state when the form has validation problems.`,
 ]);
 </script>
 <template>
-  <v-form v-model="currentFormValid">
+  <v-form ref="currentForm" v-model="currentFormValid">
     <v-container class="faded">
       <v-row>
         <v-col cols="12">

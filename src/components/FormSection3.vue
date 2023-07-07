@@ -5,7 +5,7 @@ import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
 import RowHeader from '@/components/RowHeader.vue';
 import {lengthValidator} from '@/utils';
 
-const {currentFormValid, data} = storeToRefs(useFormStore());
+const {currentForm, currentFormValid, data} = storeToRefs(useFormStore());
 
 const lengthRules = [lengthValidator(0, 50)];
 
@@ -18,7 +18,7 @@ useCurrentSectionProblems([
 ]);
 </script>
 <template>
-  <v-form v-model="currentFormValid">
+  <v-form ref="currentForm" v-model="currentFormValid">
     <v-container>
       <row-header text="Taste Profile" />
       <v-row>

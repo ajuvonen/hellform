@@ -3,17 +3,17 @@ import {ref} from 'vue';
 import HellForm from '@/components/HellForm.vue';
 import {useFormStore} from '@/stores/form';
 import {storeToRefs} from 'pinia';
-import { useRouter } from 'vue-router';
+import {useRouter} from 'vue-router';
 
 const router = useRouter();
 const formStore = useFormStore();
 const formActive = ref(false);
 
-const {data} = storeToRefs(formStore);
+const {skipAllowed} = storeToRefs(formStore);
 
 const activateForm = () => {
   formStore.$reset();
-  data.value.skipAllowed = false;
+  skipAllowed.value = false;
   formActive.value = true;
 };
 </script>
@@ -45,13 +45,18 @@ const activateForm = () => {
         <v-btn
           v-if="!formActive"
           class="mt-10"
-          :color="data.skipAllowed ? 'secondary' : 'primary'"
+          :color="skipAllowed ? 'secondary' : 'primary'"
           prepend-icon="mdi-heart"
           @click="activateForm"
           >Get Started</v-btn
         >
-        <v-btn v-if="data.skipAllowed" class="mt-10" color="primary" prepend-icon="mdi-run-fast"
-         @click="router.push('/thanks')" >Skip to Finish</v-btn
+        <v-btn
+          v-if="skipAllowed"
+          class="mt-10"
+          color="primary"
+          prepend-icon="mdi-run-fast"
+          @click="router.push('/thanks')"
+          >Skip to Finish</v-btn
         >
       </div>
     </div>
