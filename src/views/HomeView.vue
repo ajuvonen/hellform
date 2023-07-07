@@ -13,6 +13,7 @@ const {data} = storeToRefs(formStore);
 
 const activateForm = () => {
   formStore.$reset();
+  data.value.skipAllowed = false;
   formActive.value = true;
 };
 </script>
