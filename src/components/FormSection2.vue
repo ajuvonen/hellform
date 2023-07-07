@@ -27,6 +27,7 @@ const requiredRules = [requiredValidator()];
 const additionalCategoryRules = [lengthValidator(0, 100)];
 
 useCurrentSectionProblems([
+  `There's no a proper progress indicator for multi-page form, and the changes on the page are not announced to screen readers.`,
   `The contrast ratio of the text and the background is not adequate for people with impaired vision or challenging lighting conditions.`,
   `The headings are not proper heading elements, but stylized divs. This results in poor accessibility experience.`,
   `The devices are not buttons, but stylized divs. These cannot be interacted with a keyboard and are not visible to screen readers.`,
