@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@chenfengyuan/vue-countdown": "^2.1.1",
     "@mdi/font": "^7.2.96",
     "@types/ramda": "^0.29.2",
     "pinia": "^2.1.4",

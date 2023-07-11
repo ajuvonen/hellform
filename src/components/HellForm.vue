@@ -2,6 +2,8 @@
 import {ref} from 'vue';
 import {storeToRefs} from 'pinia';
 import {useRouter} from 'vue-router';
+import VueCountdown from '@chenfengyuan/vue-countdown';
+import {padCountdownZero} from '@/utils';
 import FormSection1 from '@/components/FormSection1.vue';
 import FormSection2 from '@/components/FormSection2.vue';
 import FormSection3 from '@/components/FormSection3.vue';
@@ -68,6 +70,16 @@ const nextSection = async () => {
         @click="nextSection"
         >{{ currentSection < 4 ? 'Next' : 'Submit' }}</v-btn
       >
+      <vue-countdown
+        :transform="padCountdownZero"
+        :time="8 * 60 * 1000"
+        :style="{order: 2}"
+        class="ml-auto text-h5 text-error"
+        @end="router.push('/expired')"
+        v-slot="{minutes, seconds}"
+      >
+        {{ minutes }}:{{ seconds }}
+      </vue-countdown>
     </v-card-actions>
   </v-card>
 </template>

@@ -19,6 +19,11 @@ const router = createRouter({
       name: 'thanks',
       component: () => import('@/views/ThanksView.vue'),
     },
+    {
+      path: '/expired',
+      name: 'expired',
+      component: () => import('@/views/ExpiredView.vue'),
+    },
   ],
 });
 
