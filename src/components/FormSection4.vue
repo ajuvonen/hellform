@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {storeToRefs} from 'pinia';
+import VueCountdown from '@chenfengyuan/vue-countdown';
 import {useFormStore} from '@/stores/form';
 import {useCurrentSectionProblems} from '@/hooks/currentSectionProblems';
-import {regexValidator, requiredValidator} from '@/utils';
+import {regexValidator, requiredValidator, notEmptyValidator, padCountdownZero} from '@/utils';
 import RowHeader from '@/components/RowHeader.vue';
 
 const {currentForm, currentFormValid, data} = storeToRefs(useFormStore());
@@ -25,6 +26,8 @@ const sexualOrientationOptions = [
 
 const requiredRules = [requiredValidator()];
 
+const notEmptyRules = [notEmptyValidator()];
+
 const birthdateRules = [requiredValidator(), regexValidator(/^\d{2,2}\/\d{2,2}\/\d{4,4}$/)];
 
 useCurrentSectionProblems([
@@ -33,6 +36,7 @@ useCurrentSectionProblems([
   `Access to contacts usually means your friends are about to be spammed unwillingly.`,
   `The contacts confirmation contains an example of confirm shaming, where the opt-out is worded negatively.`,
   `The free premium trial is not actually free, and contains a continuous subscription trap`,
+  `A fake counter for an ending promotion is trying to coerce users into opting in to a paid service.`,
   `The marketing consent is confusingly worded, required, and automatically active.`,
   `The Terms of Service link redirects you to a page that can't be navigated back from without losing data.`,
 ]);
@@ -82,6 +86,7 @@ useCurrentSectionProblems([
         <v-col cols="6">
           <v-radio-group
             v-model="data.contactsAccess"
+            :rules="notEmptyRules"
             label="Please give us access to your contacts and calendar"
             hide-details="auto"
           >
@@ -92,6 +97,7 @@ useCurrentSectionProblems([
         <v-col cols="6">
           <v-radio-group
             v-model="data.subscribeToPremium"
+            :rules="notEmptyRules"
             label="Choose your subscription"
             hide-details="auto"
           >
@@ -108,6 +114,16 @@ useCurrentSectionProblems([
               </v-tooltip>
             </div>
           </v-radio-group>
+          <span class="text-body-2 text-error ml-2"
+            >Order now for up to 50% off! The offer expires in
+            <vue-countdown
+              :transform="padCountdownZero"
+              :time="11.4 * 60 * 60 * 1000"
+              v-slot="{hours, minutes, seconds}"
+            >
+              {{ hours }}:{{ minutes }}:{{ seconds }}.
+            </vue-countdown>
+          </span>
         </v-col>
       </v-row>
       <v-divider class="mt-2"></v-divider>

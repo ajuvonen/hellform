@@ -3,6 +3,11 @@ export const requiredValidator = () => (value: string) => {
   return 'Required field.';
 };
 
+export const notEmptyValidator = () => (value: string) => {
+  if (['', null, undefined].indexOf(value) === -1) return true;
+  return 'Required field.';
+};
+
 export const lengthValidator = (minLength: number, maxLength: number) => (value: string) => {
   if (value.length > minLength - 1 && (!maxLength || value.length <= maxLength)) return true;
   if (value.length > maxLength) return 'Maximum length exceeded.';
@@ -246,3 +251,17 @@ export const countryCodes = [
   {value: 441534, title: '+441534 Jersey'},
   {value: 441624, title: '+441624 Isle of Man'},
 ];
+
+type countDownProps = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+export const padCountdownZero = ({hours, minutes, seconds}: countDownProps) => {
+  return {
+    hours: hours.toString().padStart(2, '0'),
+    minutes: minutes.toString().padStart(2, '0'),
+    seconds: seconds.toString().padStart(2, '0'),
+  };
+};

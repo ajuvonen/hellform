@@ -38,6 +38,7 @@ useCurrentSectionProblems([
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
   `Users with screen readers can't understand what actions the buttons perform, if they lack both text and accessibility optimization.`,
   `The next button on the form enters a disabled state when the form has validation problems.`,
+  `Countdowns in forms should be avoided unless necessary. In such case the timing should accommodate users who have accessibility challenges.`,
 ]);
 </script>
 <template>
