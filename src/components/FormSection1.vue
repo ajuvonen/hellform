@@ -23,6 +23,7 @@ const passwordRules = [
 ];
 
 useCurrentSectionProblems([
+  `If the field is not required or otherwise relevant for your service, consider leaving it optional.`,
   `Field minimum and maximum lengths are arbitrary and assume, among other things, that all users have at least three-character names.`,
   `Field length errors don't specify what the length limitation is.`,
   `Name fields don't allow anything outside A-Z and a-z as characters.`,
