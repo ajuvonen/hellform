@@ -37,7 +37,7 @@ useCurrentSectionProblems([
   `The contacts confirmation contains an example of confirm shaming, where the opt-out is worded negatively.`,
   `The free premium trial is not actually free, and contains a continuous subscription trap`,
   `A fake counter for an ending promotion is trying to coerce users into opting in to a paid service.`,
-  `The marketing consent is confusingly worded, required, and automatically active.`,
+  `The marketing consent is confusingly worded, and automatically active.`,
   `The Terms of Service link redirects you to a page that can't be navigated back from without losing data.`,
 ]);
 </script>
@@ -133,8 +133,6 @@ useCurrentSectionProblems([
             label="NO, I'm not afraid to receive great offers to my email!"
             v-model="data.receiveSpam"
             :value="true"
-            required
-            :rules="requiredRules"
           ></v-checkbox>
         </v-col>
         <v-col cols="6">
