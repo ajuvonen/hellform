@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {ref} from 'vue';
 import {lengthValidator, requiredValidator} from '@/utils';
 import {storeToRefs} from 'pinia';
 import {useFormStore} from '@/stores/form';
@@ -26,13 +27,21 @@ const requiredRules = [requiredValidator()];
 
 const additionalCategoryRules = [lengthValidator(0, 100)];
 
+const categoriesShown = ref(false);
+const showCategories = (e: Event) => {
+  e.preventDefault();
+  categoriesShown.value = true;
+};
+
 useCurrentSectionProblems([
-  `There's no a proper progress indicator for multi-page form, and the changes on the page are not announced to screen readers.`,
+  `There's no proper progress indicator for multi-page form, and the changes on the page are not announced to screen readers.`,
+  `After moving to a new page, the focus remains in the bottom of the page.`,
   `The contrast ratio of the text and the background is not adequate for people with impaired vision or challenging lighting conditions.`,
   `The headings are not proper heading elements, but stylized divs. This results in poor accessibility experience.`,
   `The devices are not buttons, but stylized divs. These cannot be interacted with a keyboard and are not visible to screen readers.`,
   `Checkboxes don't have a focus outline that would show the highlighted item. This makes keyboard navigation difficult.`,
   `The checkbox labels are not connected to the input themselves, which makes understanding the form with screen readers difficult.`,
+  `The toggle for additional categories is a link, not a toggle button. It does not announce its state correctly.`,
   `Additional categories has no label. Form instructions shouldn't be given in placeholders.`,
   `In this case, comboboxes provide an additional layer of complexity but no real value because the lists are short.`,
   `Users with screen readers may not understand table-like presentation, if the elements and their labels are not accessible.`,
@@ -82,11 +91,21 @@ useCurrentSectionProblems([
             ></v-checkbox>
             <v-label>{{ category }}</v-label>
           </div>
+        </v-col>
+        <v-col cols="12">
           <v-text-field
+            v-if="categoriesShown"
             v-model="data.additionalCategories"
             :rules="additionalCategoryRules"
             placeholder="Additional categories separated by a comma (,)"
           ></v-text-field>
+          <a
+            v-if="!categoriesShown"
+            href="#"
+            class="text-body-1 expand-link"
+            @click="showCategories"
+            >My category is not here!</a
+          >
         </v-col>
       </v-row>
       <v-row>
@@ -114,12 +133,22 @@ useCurrentSectionProblems([
           ></v-combobox>
         </v-col>
         <v-col cols="2">
-          <v-btn icon="mdi-delete" color="error" variant="tonal" @click="removeStreamingService(service)"></v-btn>
+          <v-btn
+            icon="mdi-delete"
+            color="error"
+            variant="tonal"
+            @click="removeStreamingService(service)"
+          ></v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-btn icon="mdi-plus" color="secondary" variant="tonal" @click="addStreamingService"></v-btn>
+          <v-btn
+            icon="mdi-plus"
+            color="secondary"
+            variant="tonal"
+            @click="addStreamingService"
+          ></v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -130,8 +159,13 @@ useCurrentSectionProblems([
   color: gray;
 }
 
-:deep(.v-selection-control--focus-visible::before) {
-  display: none !important;
+:deep(.v-selection-control--focus-visible::after) {
+  display: none;
+}
+
+.expand-link {
+  display: block;
+  text-decoration: none;
 }
 
 .device-button {
