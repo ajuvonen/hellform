@@ -17,7 +17,7 @@ const currentSection = ref(1);
 
 const nextSection = async () => {
   const {valid} = await currentForm.value?.validate();
-  if (true && currentSection.value < 4) {
+  if (valid && currentSection.value < 4) {
     currentSection.value = currentSection.value + 1;
   } else if (valid && currentSection.value === 4) {
     router.push('/thanks');
