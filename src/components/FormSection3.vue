@@ -22,14 +22,10 @@ useCurrentSectionProblems([
   <v-form ref="currentForm" v-model="currentFormValid">
     <v-container>
       <row-header text="Taste Profile" />
-      <v-row>
-        <v-col cols="12" class="text-body-1"
-          >Fill in some details so we can customize our service for you.</v-col
-        >
-      </v-row>
       <v-row class="with-gap">
-        <v-col cols="5" class="enclosure ml-auto">
-          <h3 class="text-h5">Favorite Male Actor</h3>
+        <v-col cols="5" class="enclosure">
+          <p>Fill in some details so we can customize our service for you. This data is optional.</p>
+          <h3 class="text-h5 mt-2">Favorite Male Actor</h3>
           <v-text-field
             v-model="data.favoriteMale"
             :rules="lengthRules"
@@ -41,7 +37,7 @@ useCurrentSectionProblems([
           <v-text-field
             v-model="data.favoriteMaleWork"
             :rules="lengthRules"
-            class="short mt-10"
+            class="mt-10 mid"
             label="Movie or Series"
             tabindex="3"
             required
@@ -62,12 +58,12 @@ useCurrentSectionProblems([
             required
           ></v-text-field>
         </v-col>
-        <v-col cols="5" class="enclosure mr-auto">
-          <h3 class="text-h5 text-right">Favorite Female Actor</h3>
+        <v-col cols="5" class="enclosure">
+          <h3 class="text-h5 mt-8">Favorite Female Actor</h3>
           <v-text-field
             v-model="data.favoriteFemale"
             :rules="lengthRules"
-            class="mt-10"
+            class="mt-10 short"
             label="Name"
             tabindex="2"
             required
@@ -75,23 +71,23 @@ useCurrentSectionProblems([
           <v-text-field
             v-model="data.favoriteFemaleWork"
             :rules="lengthRules"
-            class="short ml-auto mt-10"
+            class="mid mt-10"
             label="Movie or Series"
             tabindex="4"
             required
           ></v-text-field>
-          <h3 class="text-h5 text-right mt-6">Favorite Director</h3>
+          <h3 class="text-h5 mt-6">Favorite Director</h3>
           <v-text-field
             v-model="data.favoriteDirector"
             :rules="lengthRules"
-            class="mt-10"
+            class="mt-10 short"
             label="Name"
             required
           ></v-text-field>
           <v-text-field
             v-model="data.favoriteDirectorWork"
             :rules="lengthRules"
-            class="short ml-auto mt-10"
+            class="mt-10"
             label="Movie or Series"
             required
           ></v-text-field>
@@ -103,6 +99,10 @@ useCurrentSectionProblems([
 <style lang="scss" scoped>
 .short {
   width: 70%;
+}
+
+.mid {
+  width: 80%;
 }
 
 .enclosure {
