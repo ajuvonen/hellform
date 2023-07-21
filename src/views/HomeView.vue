@@ -18,7 +18,7 @@ const activateForm = () => {
 };
 </script>
 <template>
-  <h1 class="text-h1 text-center mt-8">Welcome to Hell</h1>
+  <h1 class="text-center mt-8">Welcome to Hell</h1>
   <v-expand-transition>
     <div class="text-center" v-if="!formActive">
       <p class="text-body-1 mt-10 text-justify">
@@ -44,7 +44,7 @@ const activateForm = () => {
       <div class="d-flex with-gap justify-center">
         <v-btn
           v-if="!formActive"
-          class="mt-10"
+          class="mt-10 marker"
           :color="skipAllowed ? 'secondary' : 'primary'"
           prepend-icon="mdi-heart"
           @click="activateForm"
@@ -52,7 +52,7 @@ const activateForm = () => {
         >
         <v-btn
           v-if="skipAllowed"
-          class="mt-10"
+          class="mt-10 marker"
           color="primary"
           prepend-icon="mdi-run-fast"
           @click="router.push('/thanks')"
