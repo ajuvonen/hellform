@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <h1 class="text-h1 text-center mt-10">Thank You</h1>
+  <h1 class="text-center mt-10">Thank You</h1>
   <p class="text-body-1 text-justify mt-10">
     I want to thank you for your patience and interest towards making The Internet a more accessible
     forum for everyone. With today's tools it feels like making this low level of usability is
