@@ -16,7 +16,7 @@ const {currentForm, currentFormValid} = storeToRefs(useFormStore());
 const currentSection = ref(1);
 
 const nextSection = async () => {
-  const {valid} = await currentForm.value?.validate();
+  const {valid} = await currentForm.value!.validate();
   if (valid && currentSection.value < 4) {
     currentSection.value = currentSection.value + 1;
   } else if (valid && currentSection.value === 4) {
